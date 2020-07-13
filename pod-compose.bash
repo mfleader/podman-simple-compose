@@ -1,15 +1,9 @@
 #! /bin/bash
 
-podname=snappy
-PGPASSWORD=secret
-PGUSER=user
-SECRET=secret
-PGPORT=5432
-pgvol=pgvol
-DBNAME=postgres
+source .env
 
-# database uri
-cxnstr=postgres+psycopg2://$PGUSER:$PGPASSWORD@localhost:$PGPORT/$DBNAME
+podname=snappy
+pgvol=pgvol
 
 
 podman pod exists $podname && podman pod rm $podname
@@ -23,6 +17,12 @@ podman run \
     --name db-svc \
     --pod $podname \
     --publish $PGPORT \
-    --volume $pgvol \
+    --volume $pgvol:/var/lib/postgresql/data \
     postgres:12.3-alpine
     
+
+podman run \
+    --detach
+    --name api
+    --pod $podname \
+    localhost/users

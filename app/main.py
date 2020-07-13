@@ -1,19 +1,25 @@
+import os
+
 import uvicorn
 from fastapi import FastAPI
-import os
+import environs
 from fastapi_sqlalchemy import DBSessionMiddleware
 from fastapi_sqlalchemy import db
 from models import User as ModelUser
 from schema import User as SchemaUser
-from dotenv import load_dotenv
 
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-load_dotenv(os.path.join(BASE_DIR, ".env"))
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+env = environs.Env()
+env.read_env()
 
 app = FastAPI()
 
-app.add_middleware(DBSessionMiddleware, db_url=os.environ["DATABASE_URL"])
+app.add_middleware(DBSessionMiddleware, 
+    db_url=env('DB_URI')
+)
 
 
 @app.post("/user/", response_model=SchemaUser)
@@ -26,5 +32,4 @@ async def create_user(user: SchemaUser):
     return db_user
 
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+

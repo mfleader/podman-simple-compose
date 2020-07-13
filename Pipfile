@@ -4,21 +4,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-flake8 = "*"
-ipython = "*"
-black = "*"
 
 [packages]
 fastapi = "*"
 fastapi-sqlalchemy = "*"
-pydantic = "*"
 alembic = "*"
 psycopg2 = "*"
 uvicorn = "*"
 python-dotenv = "*"
+environs = "*"
+fastapi-users = "*"
 
 [requires]
-python_version = "3.7"
-
-[pipenv]
-allow_prereleases = true
+python_version = "3.8"
