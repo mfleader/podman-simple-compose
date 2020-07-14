@@ -16,12 +16,11 @@ import app.models.models as mdl
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 RESULTS_DIR = '/'.join((ROOT_DIR, 'results'))
-
 print(RESULTS_DIR)
 env = environs.Env()
 env.read_env(recurse=False)
 DATABASE_URL = env('DB_URL')
-SECRET = "SECRET"
+SECRET = env('SECRET')
 HOST = env('DATA_SERVER_PUBLIC_HOST')
 PORT = env('DATA_SERVER_PORT') 
 VALID_EXTENSIONS = (
@@ -61,7 +60,7 @@ app.mount('/results', WSGIMiddleware(flask_app))
 
 @app.get('/')
 async def root(): 
-    return star.responses.RedirectResponse(url = '/results')
+    return star.responses.RedirectResponse(url = '/docs')
 
 
 @app.on_event("startup")

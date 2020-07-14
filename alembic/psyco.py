@@ -10,7 +10,7 @@ try:
                                   host = env('POSTGRES_SERVER'),
                                   port = env('POSTGRES_PORT'),
                                   database = env('DBNAME'))
-    print(connection)
+    
 
     cursor = connection.cursor()
     # Print PostgreSQL Connection properties

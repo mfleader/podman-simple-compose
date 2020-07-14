@@ -4,5 +4,5 @@ You **must** add this directory to the `PYTHONPATH`, so that the [path based imp
 
 ```shell
 cd podman-simple-compose
-export PYTHONPATH="$(pwd):$PYTHONPATH"
+export PYTHONPATH="$(pwd)"
 ```

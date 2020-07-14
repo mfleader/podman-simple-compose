@@ -15,6 +15,9 @@ python-dotenv = "*"
 environs = "*"
 fastapi-users = "*"
 databases = "*"
+aiofiles = "*"
+flask-autoindex = "*"
+asyncpg = "*"
 
 [requires]
 python_version = "3.8"

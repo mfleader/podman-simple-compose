@@ -32,9 +32,10 @@ target_metadata = Base.metadata
 def get_url():
     user = os.getenv("POSTGRES_USER", "postgres")
     password = os.getenv("POSTGRES_PASSWORD", "")
-    server = os.getenv("POSTGRES_SERVER", "db")
+    server = os.getenv("POSTGRES_SERVER", "localhost")
     db = os.getenv("DBNAME", "postgres")
-    return f"postgres+psycopg2://{user}:{password}@{server}/{db}"
+    port = os.getenv('POSTGRES_PORT', '5432')
+    return f"postgres+psycopg2://{user}:{password}@{server}:{port}/{db}"
 
 
 
@@ -70,6 +71,7 @@ def run_migrations_online():
     """
     cfg = config.get_section(config.config_ini_section)
     cfg["sqlalchemy.url"] = get_url()
+    print(cfg['sqlalchemy.url'])
     connectable = engine_from_config(
         cfg,
         prefix="sqlalchemy.",
