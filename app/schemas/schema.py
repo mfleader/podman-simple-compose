@@ -1,11 +1,7 @@
-from pydantic import BaseModel
+import fastapi_users as fastusr
+
+from app.db.base_class import Base
 
 
-class User(BaseModel):
-    first_name: str
-    last_name: str
-    age: int
-
-    class Config:
-        orm_mode = True
-
+class UserTable(Base, fastusr.db.SQLAlchemyBaseUserTable):
+    pass

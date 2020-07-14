@@ -9,4 +9,5 @@ from app.db import base
 
 
 def init_db(db: Session) -> None:
+    """Initialize db with a superuser"""
     pass
